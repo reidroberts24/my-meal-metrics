@@ -1,0 +1,29 @@
+
+Nutrition Tracker App Project Description
+-----------------------------------------
+
+Project Name: MyMealMetrics
+
+Project Stack: MERN
+- Frontend: React, Material UI
+- Backend: Node.js with Express.js (for server-side logic and API endpoints)
+- Database: MongoDB (for storing user data and food entries)
+- Version Control: Git/GitHub
+
+Features:
+1. Basic Food Log: Manual entry of foods consumed with portion sizes, and the app calculates calorie and macronutrient content.
+2. Daily Nutritional Summary: Provides a summary of total calorie intake and a breakdown of macronutrients for each day.
+3. Customizable Goals Setting: Users can set personal nutritional goals (calorie limits, macro ratios) and track their progress.
+4. Manual Entry of Nutritional Data: Option for users to manually input nutritional information for foods not in the database.
+
+GitHub Repository Link: [Your GitHub Repo Link Here]
+
+Product Backlog for Post-MVP:
+- Integration with a food database API for automatic nutrient calculation.
+- Barcode scanner feature to quickly add packaged foods.
+- User account creation and authentication for personalized experience.
+- Sharing and comparing nutritional data with friends or family.
+- Notifications and reminders for meal logging and goal tracking.
+- Exporting data feature for meal history and nutritional summaries.
+- Adding a feature to track water intake and hydration goals.
+- Mobile app version for on-the-go tracking.
