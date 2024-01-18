@@ -22,13 +22,13 @@ const CaloriePieChart = ({ dailyTarget }) => {
   }, []);
 
   const fetchMeals = () => {
-    return axios.get('/api/meals') // Replace '/api/meals' with your actual API endpoint
-      .then(response => response.data) // Assuming the response contains the array of meals
-      .catch(error => {
-        console.error('Error fetching meals:', error);
-        return []; // Return an empty array in case of error
-      });
-  };
+  return axios.get('http://localhost:8000/api/meals') // Update with your server's URL
+    .then(response => response.data)
+    .catch(error => {
+      console.error('Error fetching meals:', error);
+      return [];
+    });
+};
 
   return (
     <Box>
