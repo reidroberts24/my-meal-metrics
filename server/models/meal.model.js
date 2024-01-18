@@ -8,23 +8,23 @@ const mealSchema = new mongoose.Schema({
   },
   description: {
     type: String,
-    required: true
+    required: [true, "Please add a name/description"]
   },
   calories: {
     type: Number,
-    required: true
+    required: [true, "Please add the calories"]
   },
   fat: {
     type: Number,
-    required: true
+    required: [true, "Please add the fat content (grams)"]
   },
   carbs: {
     type: Number,
-    required: true
+    required: [true, "Please add the carb content (grams)"]
   },
   protein: {
     type: Number,
-    required: true
+    required: [true, "Please add the protein content (grams)"]
   },
   created_at: {
     type: Date,
