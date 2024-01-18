@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const userController = require('../controllers/userController'); // Adjust path as needed
+const userController = require('../controllers/user.controller'); // Adjust path as needed
 
 // POST route for user registration
 router.post('/users/register', userController.register);
