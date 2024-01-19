@@ -1,15 +1,17 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import React, { useState } from 'react'
 import './App.css'
-import PieChart
- from './components/PieChart'
+import LandingPage from './views/LandingPage'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
 function App() {
 
   return (
-    <>
-      <PieChart/>
-    </>
+    <Router>
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+      </Routes>
+    </Router>
+
   )
 }
 

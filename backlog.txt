@@ -1,0 +1,11 @@
+create user API
+create Meal API
+finished backend for the most part
+created registration and login page that works
+need to create user dashboard
+
+Product Backlog for Post-MVP:
+- Create User login/registration page
+- Integration with a food database API for automatic nutrient calculation.
+- Adding a feature to track water intake and hydration goals.
+- Notifications and reminders for meal logging and goal tracking.
