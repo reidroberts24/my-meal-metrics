@@ -1,8 +1,8 @@
-const Meal = require('../models/product.model')
+const Meal = require('../models/meal.model')
 
 module.exports.addMeal = (req, res) => {
     mealInfo = req.body
-    Meal.create(productInfo)
+    Meal.create(mealInfo)
         .then( meal => res.json(meal))
         .catch( err => res.json(err))
 }

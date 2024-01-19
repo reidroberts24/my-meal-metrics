@@ -3,7 +3,7 @@ import { Pie } from 'react-chartjs-2';
 import { Typography, CircularProgress, Box } from '@material-ui/core';
 import axios from 'axios';
 
-const CaloriePieChart = ({ dailyTarget }) => {
+const PieChart = ({ dailyTarget }) => {
   const [calorieData, setCalorieData] = useState(null);
 
   useEffect(() => {
@@ -42,4 +42,4 @@ const CaloriePieChart = ({ dailyTarget }) => {
   );
 };
 
-export default CaloriePieChart;
+export default PieChart;

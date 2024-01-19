@@ -1,4 +1,4 @@
-const User = require('../models/User'); // Adjust the path as per your project structure
+const User = require('../models/user.model'); // Adjust the path as per your project structure
 
 module.exports.register = (req, res) => {
   User.create(req.body)
