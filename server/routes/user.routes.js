@@ -1,10 +1,9 @@
-const express = require('express');
-const router = express.Router();
-const userController = require('../controllers/user.controller'); // Adjust path as needed
+const Users = require('../controllers/user.controller'); // Adjust path as needed
+const { authenticate } = require('../config/jwt.config');
 
-// POST route for user registration
-router.post('/users/register', userController.register);
-
+module.exports = (app) => {
+    app.post('/api/users/register', Users.register); // POST route for user registration
+    app.post('/api/users/login', Users.login)
+    app.get('/api/users', authenticate, Users.getUsers) //get list of users (for testing mainly)
+}
 // Add more user-related routes as needed, e.g., login, update profile, etc.
-
-module.exports = router;

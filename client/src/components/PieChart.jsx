@@ -1,7 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { Pie } from 'react-chartjs-2';
-import { Typography, CircularProgress, Box } from '@material-ui/core';
+import { Chart, ArcElement, Tooltip, Legend } from 'chart.js';
+Chart.register(ArcElement, Tooltip, Legend);
+import { Typography, CircularProgress, Box } from '@mui/material';
 import axios from 'axios';
+
+
+
+
+
+// IMPORTANT: NOW THAT WE ARE USING COOKIES FOR AUTHENTICATION AND AUTHORIZATION, WE WILL MAKE SURE EACH REQUEST IS SENT WITH { withCredentials: true }. 
+// THIS WILL SEND THE COOKIES WITH EACH REQUEST SO OUR MIDDLEWARE WILL VERIFY WHO IS LOGGED IN.
+
+
+
 
 const PieChart = ({ dailyTarget }) => {
   const [calorieData, setCalorieData] = useState(null);
