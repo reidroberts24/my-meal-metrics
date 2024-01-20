@@ -19,18 +19,7 @@ module.exports.register = async(req, res) => {
         })
         .json({ msg: "success!", user: user });
     })
-    .catch(err => {
-      // Check if this is a Mongoose validation error
-      if (err.name === 'MongoServerError' && err.code === 11000) {
-        return res.status(400).json({ message: "Email already exists" });
-      } else if (err.name === 'ValidationError') {
-        // Handle Mongoose validation errors
-        return res.status(400).json(err);
-      } else {
-        // Handle all other errors
-        return res.status(500).json({ message: "An error occurred", error: err });
-      }
-    });
+    .catch(err => response.status(400).json(err))
 };
 
 module.exports.login = async(req, res) => {
