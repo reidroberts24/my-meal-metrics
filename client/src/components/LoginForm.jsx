@@ -5,31 +5,27 @@ import { useNavigate } from 'react-router-dom';
 
 const LoginForm = () => {
   const [formData, setFormData] = useState({ email: '', password: '' });
-  const [errorMessages, setErrorMessages] = useState({ email: '', password: '' });
+  const [formErrors, setFormErrors] = useState({});
   const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
-    // Reset error message for the field
-    setErrorMessages({ ...errorMessages, [e.target.name]: '' });
+    setFormErrors({ ...formErrors, [e.target.name]: '' });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:8000/api/users/login', formData, { withCredentials: true });
-      navigate('/dashboard'); // Redirect to dashboard after successful login
+      await axios.post('http://localhost:8000/api/users/login', formData, { withCredentials: true });
+      navigate('/dashboard');
     } catch (error) {
-      console.error(error.response.data); // Log errors
-      // Update error messages state based on response from the server
-      const errors = error.response.data;
-      setErrorMessages({
-        email: errors.email || '',
-        password: errors.password || '',
-      });
+      if (error.response && error.response.data && error.response.data.errors) {
+        setFormErrors(error.response.data.errors);
+      } else {
+        setFormErrors({ general: 'An error occurred. Please try again later.' });
+      }
     }
   };
-
 
   return (
     <Paper style={{ padding: '20px', maxWidth: '400px', margin: 'auto' }}>
@@ -41,8 +37,8 @@ const LoginForm = () => {
           label="Email" 
           margin="normal" 
           onChange={handleChange} 
-          error={Boolean(errorMessages.email)} 
-          helperText={errorMessages.email}
+          error={!!formErrors.email}
+          helperText={formErrors.email ? formErrors.email.message : ''}
         />
         <TextField 
           name="password" 
@@ -51,9 +47,10 @@ const LoginForm = () => {
           type="password" 
           margin="normal" 
           onChange={handleChange} 
-          error={Boolean(errorMessages.password)} 
-          helperText={errorMessages.password}
+          error={!!formErrors.password}
+          helperText={formErrors.password ? formErrors.password.message : ''}
         />
+        {formErrors.general && <p>{formErrors.general}</p>}
         <Button type="submit" variant="contained" color="primary" style={{ marginTop: '20px' }}>Sign In</Button>
       </Box>
     </Paper>

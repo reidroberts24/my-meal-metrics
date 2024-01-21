@@ -22,7 +22,22 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: [true, "Password is required"],
     minlength: [8, "Password must be 8 characters or longer"]
+  },
+  dailyGoals: {
+    calories: {
+      type: Number
+    },
+    fat: {
+      type: Number
+    },
+    carbs: {
+      type: Number
+    },
+    protein: {
+      type: Number
+    }
   }
+
 }, { timestamps: true });
 
 // Virtual for confirmPassword
