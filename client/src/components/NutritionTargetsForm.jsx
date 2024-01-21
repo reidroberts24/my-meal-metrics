@@ -21,7 +21,7 @@ const NutritionTargetsForm = () => {
     event.preventDefault();
     try {
       // Replace URL with your API endpoint
-      const response = await axios.post('http://your-api-endpoint/update-nutrition-targets', nutritionTargets);
+      const response = await axios.post('http://localhost:8000/api/users/updategoals', nutritionTargets);
       console.log(response.data);
     } catch (error) {
       console.error('Error updating nutrition targets:', error);
