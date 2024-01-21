@@ -55,42 +55,4 @@ module.exports.getUsers = (req, res) => { //used for testing
       .catch( err => res.json(err) )
 }
 
-module.exports.updateDailyGoals = async (req, res) => {
-  // Assuming the user's ID is extracted from the token by middleware
-  const userId = req.user.id; // Adjust based on how your middleware sets the user's ID
-
-  try {
-    const user = await User.findById(userId);
-    if (!user) {
-      return res.status(404).json({ error: "User not found" });
-    }
-
-    // Update user's daily targets here
-    user.dailyTargets = { ...user.dailyTargets, ...req.body };
-    await user.save();
-
-    res.json({ msg: "Daily goals updated successfully" });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-};
-
-
-module.exports.deleteDailyGoals = async (req, res) => {
-  const { userId } = req.body;
-
-  try {
-    const user = await User.findById(userId);
-    if (!user) {
-      return res.status(404).json({ error: "User not found" });
-    }
-
-    user.dailyTargets = { calories: null, fat: null, carbs: null, protein: null };
-    await user.save();
-
-    res.json({ msg: "Daily goals deleted successfully" });
-  } catch (err) {
-    res.status(400).json({ error: err.message });
-  }
-};
 

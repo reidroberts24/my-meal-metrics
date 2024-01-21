@@ -1,68 +1,79 @@
-import React, { useState } from 'react';
-import { TextField, Button, Box } from '@mui/material';
-import axios from 'axios';
+// NutritionTargetsForm.jsx
 
-const NutritionTargetsForm = () => {
-  const [nutritionTargets, setNutritionTargets] = useState({
-    calories: '',
-    fat: '',
-    carbs: '',
-    protein: ''
+import React, { useEffect, useState } from 'react';
+import { TextField, Button, Box, InputLabel } from '@mui/material';
+
+const NutritionTargetsForm = ({ onSubmit, onDelete, initialValues }) => {
+  const [formValues, setFormValues] = useState(initialValues || {
+    dailyCalories: undefined, 
+    dailyProtein: undefined, 
+    dailyFat: undefined, 
+    dailyCarbs: undefined, 
   });
 
-  const handleChange = (event) => {
-    setNutritionTargets({
-      ...nutritionTargets,
-      [event.target.name]: event.target.value
+  useEffect(() => {
+    setFormValues(initialValues || {
+      dailyCalories: undefined,
+      dailyProtein: undefined,
+      dailyFat: undefined, 
+      dailyCarbs: undefined,
+    });
+  }, [initialValues]);
+  
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormValues({
+      ...formValues,
+      [name]: value
     });
   };
 
-  const handleSubmit = async (e) => {
-    event.preventDefault();
-    try {
-      const response = await axios.post('http://localhost:8000/api/users/updategoals', nutritionTargets, { withCredentials: true });
-      console.log(response.data);
-    } catch (error) {
-      console.error('Error updating nutrition targets:', error);
-    }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onSubmit(formValues);
   };
 
   return (
-    <Box component="form" noValidate autoComplete="off" onSubmit={handleSubmit}>
+    <Box component="form" onSubmit={ handleSubmit }>
+      
+      <InputLabel htmlFor="dailyCalories">Daily Calories Goal</InputLabel>
       <TextField
-        name="calories"
-        label="Daily Calories Goal"
-        value={nutritionTargets.calories}
-        onChange={handleChange}
+        name="dailyCalories"
         margin="normal"
         fullWidth
+        value={ formValues.dailyCalories }
+        onChange={handleChange} // Add onChange handler to update formValues
       />
+      
+      <InputLabel htmlFor="dailyProtein">Daily Protein Goal</InputLabel>
       <TextField
-        name="fat"
-        label="Daily Fat Goal (g)"
-        value={nutritionTargets.fat}
-        onChange={handleChange}
+        name="dailyProtein"
         margin="normal"
         fullWidth
+        value={ formValues.dailyProtein }
+        onChange={handleChange} // Add onChange handler to update formValues
       />
+      
+      <InputLabel htmlFor="dailyFat">Daily Fat Goal</InputLabel>
       <TextField
-        name="carbs"
-        label="Daily Carbs Goal (g)"
-        value={nutritionTargets.carbs}
-        onChange={handleChange}
+        name="dailyFat"
         margin="normal"
         fullWidth
+        value={ formValues.dailyFat }
+        onChange={handleChange} // Add onChange handler to update formValues
       />
+  
+      <InputLabel htmlFor="dailyCarbs">Daily Carbs Goal</InputLabel>
       <TextField
-        name="protein"
-        label="Daily Protein Goal (g)"
-        value={nutritionTargets.Goal}
-        onChange={handleChange}
+        name="dailyCarbs"
         margin="normal"
         fullWidth
+        value={ formValues.dailyCarbs }
+        onChange={handleChange} // Add onChange handler to update formValues
       />
       <Button type="submit" variant="contained" color="primary">
-        Update Goals
+        Save Goals
       </Button>
     </Box>
   );

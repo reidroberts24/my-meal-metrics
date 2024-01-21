@@ -7,4 +7,4 @@ module.exports = (app) => {
     app.put('/api/meals/:id', mealController.updateMeal); // PUT route for updating a meal by ID
     app.delete('/api/meals/:id', mealController.deleteMeal); // DELETE route for deleting a meal by ID
 
-}
+} 

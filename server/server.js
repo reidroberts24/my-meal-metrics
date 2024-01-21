@@ -8,6 +8,7 @@ const jwtSecret = process.env.JWT_SECRET;
 const PORT = process.env.PORT || 8000;
 const mealRoutes = require('./routes/meal.routes');
 const userRoutes = require('./routes/user.routes');
+const goalRoutes = require('./routes/goal.routes')
 const app = express();
 
 mongoose.connect(process.env.DATABASE_URI, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -23,8 +24,9 @@ app.get('/', (req, res) => {
     res.send('MyMealMetrics Backend is running!');
 });
 
-mealRoutes(app); // Integrating meal routes
-userRoutes(app); // Integrating user routes
+mealRoutes(app); 
+userRoutes(app); 
+goalRoutes(app);
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
