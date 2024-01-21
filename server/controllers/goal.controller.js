@@ -1,5 +1,4 @@
 const Goal  = require('../models/goal.model')
-//const { authenticate } = require('../config/jwt.config');
 
 module.exports.addGoals = (req, res) => {
     const goalInfo = req.body

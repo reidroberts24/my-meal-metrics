@@ -1,10 +1,12 @@
-const mealController = require('../controllers/meal.controller'); // Adjust path as needed
+// meal.routes.js
+
+const mealController = require('../controllers/meal.controller');
+const { authenticate } = require('../config/jwt.config'); // Import the authenticate middleware
 
 module.exports = (app) => {
-    app.post('/api/meals', mealController.addMeal); // POST route for adding a new meal
-    app.get('/api/meals', mealController.getAllMeals); // GET route for getting all meals
-    app.get('/api/meals/:id', mealController.getOneMeal); // GET route for getting a single meal by ID;  ":id" needs to match the parameter name in req.params.id <- id matched
-    app.put('/api/meals/:id', mealController.updateMeal); // PUT route for updating a meal by ID
-    app.delete('/api/meals/:id', mealController.deleteMeal); // DELETE route for deleting a meal by ID
-
-} 
+  app.post('/api/meals', authenticate, mealController.addMeal); // Add a new meal with userId
+  app.get('/api/meals', authenticate, mealController.getAllMeals); // Get all meals for a specific user
+  app.get('/api/meals/:id', authenticate, mealController.getOneMeal); // Get a single meal by ID for a specific user
+  app.put('/api/meals/:id', authenticate, mealController.updateMeal); // Update a meal by ID for a specific user
+  app.delete('/api/meals/:id', authenticate, mealController.deleteMeal); // Delete a meal by ID for a specific user
+};
