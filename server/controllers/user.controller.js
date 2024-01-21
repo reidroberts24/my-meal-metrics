@@ -56,20 +56,25 @@ module.exports.getUsers = (req, res) => { //used for testing
 }
 
 module.exports.updateDailyGoals = async (req, res) => {
-  const { userId, dailyGoals } = req.body
+  // Assuming the user's ID is extracted from the token by middleware
+  const userId = req.user.id; // Adjust based on how your middleware sets the user's ID
+
   try {
     const user = await User.findById(userId);
     if (!user) {
-      return res.status(400).json({errors: "User not found"})
+      return res.status(404).json({ error: "User not found" });
     }
-    user.dailyGoals = dailyGoals;
-    await user.save();
-    res.json({ msg: "Daily goals updated!"})
 
+    // Update user's daily targets here
+    user.dailyTargets = { ...user.dailyTargets, ...req.body };
+    await user.save();
+
+    res.json({ msg: "Daily goals updated successfully" });
   } catch (err) {
-    res.status()
+    res.status(500).json({ error: err.message });
   }
-}
+};
+
 
 module.exports.deleteDailyGoals = async (req, res) => {
   const { userId } = req.body;
@@ -88,3 +93,4 @@ module.exports.deleteDailyGoals = async (req, res) => {
     res.status(400).json({ error: err.message });
   }
 };
+

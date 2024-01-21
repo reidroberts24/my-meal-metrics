@@ -21,7 +21,7 @@ const RegistrationForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:8000/api/users/register', formData);
+      const response = await axios.post('http://localhost:8000/api/users/register', formData, { withCredentials: true });
       navigate('/dashboard'); // Redirect to dashboard after successful registration
     } catch (error) {      
       if (error.response && error.response.data && error.response.data.errors) {
