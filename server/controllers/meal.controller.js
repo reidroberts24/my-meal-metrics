@@ -25,7 +25,7 @@ module.exports.updateMeal = (req, res) => {
     Meal.findByIdAndUpdate(
         { _id: req.params.id, userId: req.userId }, // Update a meal by ID for the specific user
         req.body,
-        { new: true }
+        { new: true, runValidators: true }
     )
     .then( updatedMeal => res.json(updatedMeal) )
     .catch( err => res.json(err))

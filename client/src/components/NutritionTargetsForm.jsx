@@ -1,77 +1,88 @@
 // NutritionTargetsForm.jsx
 
 import React, { useEffect, useState } from 'react';
-import { TextField, Button, Box, InputLabel } from '@mui/material';
+import { Grid, TextField, Button, Box, InputLabel } from '@mui/material';
 
-const NutritionTargetsForm = ({ onSubmit, onDelete, initialValues }) => {
-  const [formValues, setFormValues] = useState(initialValues || {
-    dailyCalories: undefined, 
-    dailyProtein: undefined, 
-    dailyFat: undefined, 
-    dailyCarbs: undefined, 
+const NutritionTargetsForm = ({ onSubmit }) => {
+  const [userGoals, setUserGoals] = useState({
+    dailyCalories: '',
+    dailyProtein: '',
+    dailyFat: '',
+    dailyCarbs: ''
   });
-
-  useEffect(() => {
-    setFormValues(initialValues || {
-      dailyCalories: undefined,
-      dailyProtein: undefined,
-      dailyFat: undefined, 
-      dailyCarbs: undefined,
-    });
-  }, [initialValues]);
   
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormValues({
-      ...formValues,
-      [name]: value
-    });
+    setUserGoals({ ...userGoals, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit(formValues);
+    onSubmit(userGoals);
+    setUserGoals({
+      dailyCalories: '',
+      dailyProtein: '',
+      dailyFat: '',
+      dailyCarbs: ''
+    });
   };
-
+  
   return (
     <Box component="form" onSubmit={ handleSubmit }>
+      <Grid container spacing={2} alignItems="center">
+        <Grid item xs={4}>
+          <InputLabel htmlFor="dailyCalories">Calories Goal</InputLabel>
+        </Grid>
+        <Grid item xs={8}>
+          <TextField
+            name="dailyCalories"
+            margin="normal"
+            fullWidth
+            value={ userGoals.dailyCalories }
+            onChange={handleChange} // Add onChange handler to update formValues
+          />
+        </Grid>
+
+        <Grid item xs={4}>
+          <InputLabel htmlFor="dailyProtein">Protein Goal</InputLabel>
+        </Grid>
+        <Grid item xs={8}>
+          <TextField
+            name="dailyProtein"
+            margin="normal"
+            fullWidth
+            value={ userGoals.dailyProtein }
+            onChange={handleChange} // Add onChange handler to update formValues
+          />
+        </Grid>
       
-      <InputLabel htmlFor="dailyCalories">Daily Calories Goal</InputLabel>
-      <TextField
-        name="dailyCalories"
-        margin="normal"
-        fullWidth
-        value={ formValues.dailyCalories }
-        onChange={handleChange} // Add onChange handler to update formValues
-      />
-      
-      <InputLabel htmlFor="dailyProtein">Daily Protein Goal</InputLabel>
-      <TextField
-        name="dailyProtein"
-        margin="normal"
-        fullWidth
-        value={ formValues.dailyProtein }
-        onChange={handleChange} // Add onChange handler to update formValues
-      />
-      
-      <InputLabel htmlFor="dailyFat">Daily Fat Goal</InputLabel>
-      <TextField
-        name="dailyFat"
-        margin="normal"
-        fullWidth
-        value={ formValues.dailyFat }
-        onChange={handleChange} // Add onChange handler to update formValues
-      />
-  
-      <InputLabel htmlFor="dailyCarbs">Daily Carbs Goal</InputLabel>
-      <TextField
-        name="dailyCarbs"
-        margin="normal"
-        fullWidth
-        value={ formValues.dailyCarbs }
-        onChange={handleChange} // Add onChange handler to update formValues
-      />
+        <Grid item xs={4}>
+          <InputLabel htmlFor="dailyFat">Fat Goal</InputLabel>
+        </Grid>
+        <Grid item xs={8}>
+          <TextField
+            name="dailyFat"
+            margin="normal"
+            fullWidth
+            value={ userGoals.dailyFat }
+            onChange={handleChange} // Add onChange handler to update formValues
+          />
+        </Grid>
+
+        <Grid item xs={4}>
+          <InputLabel htmlFor="dailyCarbs">Carbs Goal</InputLabel>
+        </Grid>
+        
+        <Grid item xs={8}>
+          <TextField
+            name="dailyCarbs"
+            margin="normal"
+            fullWidth
+            value={ userGoals.dailyCarbs }
+            onChange={handleChange} // Add onChange handler to update formValues
+          />
+        </Grid>
+      </Grid>
       <Button type="submit" variant="contained" color="primary">
         Save Goals
       </Button>
