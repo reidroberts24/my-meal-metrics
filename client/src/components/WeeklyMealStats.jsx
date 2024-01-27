@@ -56,7 +56,7 @@ const WeeklyMealStats = ({ userMeals, userGoals }) => {
         const dataPoints = last7DaysData.map((dailyTotal) => dailyTotal[attribute]);
 
         chartData[attribute] = {
-            labels: ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', 'Today'],
+            labels: ['Day 7', 'Day 6', 'Day 5', 'Day 4', 'Day 3', 'Day 2', 'Today'],
             datasets: [
             {
                 label: `${attribute.charAt(0).toUpperCase() + attribute.slice(1)} by Day`,
@@ -71,9 +71,10 @@ const WeeklyMealStats = ({ userMeals, userGoals }) => {
                 borderColor: 'rgba(255, 99, 132, 0.6)',
             },
             ],
-        };
-    }
+            }
 
+        };
+    
     return chartData;
   };
 
@@ -95,7 +96,7 @@ const WeeklyMealStats = ({ userMeals, userGoals }) => {
     }
     return (
         <div style={{ marginTop: '20px', marginBottom: '20px' }}>
-            <h3>Weekly Meal Stats</h3>
+            <h3>Past 7 Days Summary</h3>
             <div style={{ display: 'flex', flexDirection: 'row', overflowX: 'auto' }}>
                 {['calories', 'protein', 'fat', 'carbs'].map((attribute) => (
                 <div key={attribute} style={{ flex: '1', minWidth: '300px', marginRight: '16px' }}>

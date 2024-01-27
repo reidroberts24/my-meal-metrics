@@ -54,7 +54,7 @@ const DailyMealStats = ({ userMeals, userGoals }) => {
     
     return (
         <div>
-            <h3>Today's Meal Stats</h3>
+            <h3>Today's Summary</h3>
             <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}>
                 {['calories', 'protein', 'fat', 'carbs'].map((attribute) => (
                 <div key={attribute} style={{ flex: '1', minWidth: '200px', marginRight: '16px' }}>
